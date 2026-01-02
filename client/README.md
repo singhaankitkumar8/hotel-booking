@@ -9,3 +9,5 @@
 - [NodeMailer](https://nodemailer.com/)
 - [Brevo.com](https://app.brevo.com/settings/keys/smtp)
 - [vercel](https://vercel.com/anshus-projects-29e0aad8/hotel-booking-backend)
+
+- [Stripe](https://dashboard.stripe.com/acct_1SlBtlPsM8RvTuQR/test/apikeys)

@@ -9,6 +9,7 @@ import hotelRouter from './routes/hotelRoute.js';
 import connectCloudinary from "./configs/cloudinary.js"
 import roomRouter from './routes/roomRoute.js';
 import bookingRouter from './routes/bookingRoute.js';
+import { stripeWebhooks } from './controllers/stripeWebhooks.js';
 
 // dotenv.config({
 //     path:'./.env'
@@ -25,6 +26,9 @@ app.use(cors())    //Enable cross origin resource sharing
 //Middlewares
 app.use(express.json())
 app.use(clerkMiddleware())     //clerk middleware
+
+//API to listen to stripe webhook
+app.post('/api/stripe', express.raw({type: "application/json"}),stripeWebhooks)
 
 //API to listen to clerk webhook
 app.use("/api/clerk" , clerkWebhooks)
