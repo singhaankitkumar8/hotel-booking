@@ -8,3 +8,4 @@
 - [MongoDB Atlas](https://cloud.mongodb.com/v2/694e7d6870722724624b96f0#/overview)
 - [NodeMailer](https://nodemailer.com/)
 - [Brevo.com](https://app.brevo.com/settings/keys/smtp)
+- [vercel](https://vercel.com/anshus-projects-29e0aad8/hotel-booking-backend)
