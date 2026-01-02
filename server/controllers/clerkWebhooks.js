@@ -18,6 +18,7 @@ const clerkWebhooks = async (req , res) => {
 
         //Getting Data from request body
         const {data,type} = req.body
+        //console.log(type);
 
         const userData = {
             _id: data.id,
@@ -25,7 +26,7 @@ const clerkWebhooks = async (req , res) => {
             username: data.fist_name + " " + data.last_name,
             image: data.image_url,
         }
-
+         //console.log(userData);
         //Switch cases for different events
         switch (type) {
             case "user.created":{
@@ -33,11 +34,11 @@ const clerkWebhooks = async (req , res) => {
                 break;
             }
             case "user.updated":{
-                await User.findByIdAndUpdate(data.id,userData);
+                await User.findByIdAndUpdate(data.id , userData);
                 break;
             }    
             case "user.deleted":{
-                await User.findByIdAndDelete(userData);
+                await User.findByIdAndDelete(data.id , userData);
                 break;
             }   
         
