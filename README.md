@@ -127,7 +127,7 @@ Clerk (Authentication)
 **Dashboard**  
 ![Dashboard](./screenshots/dashboard.png)  
 
-**Live Demo:** [Frontend](https://quickstay-9vry2d89v-anshus-projects-29e0aad8.vercel.app/) | [Backend API]()
+**Live Demo:** [Frontend](https://quickstay-9vry2d89v-anshus-projects-29e0aad8.vercel.app/) | [Backend API](https://hotel-booking-backend-dun-rho.vercel.app/)
 
 ---
 
