@@ -17,9 +17,11 @@ const ListRoom = () => {
         setRooms(data.rooms)
       }else{
         toast.error(data.message)
+        console.log(data.message)
       }
     } catch (error) {
       toast.error(error.message)
+      console.log(error.message)
     }
   }
   // Toggle availability of room
@@ -30,6 +32,7 @@ const ListRoom = () => {
       fetchRooms()
     }else{
       toast.error(data.message)
+      console.log(data.message)
     }
   }
 

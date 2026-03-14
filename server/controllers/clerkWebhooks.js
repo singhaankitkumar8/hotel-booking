@@ -18,6 +18,8 @@ const clerkWebhooks = async (req , res) => {
 
         //Getting Data from request body
         const {data,type} = req.body
+
+        console.log("Webhook triggered:", type)
         
         //Switch cases for different events
         switch (type) {
@@ -25,7 +27,7 @@ const clerkWebhooks = async (req , res) => {
                 const userData = {
                     _id: data.id,
                     email:data.email_addresses[0].email_address,
-                    username: data.fist_name + " " + data.last_name,
+                    username: data.first_name + " " + data.last_name,
                     image: data.image_url,
                 }
                 await User.create(userData);
@@ -33,16 +35,16 @@ const clerkWebhooks = async (req , res) => {
             }
             case "user.updated":{
                 const userData = {
-                    _id: data.id,
+                    // _id: data.id,
                     email:data.email_addresses[0].email_address,
-                    username: data.fist_name + " " + data.last_name,
+                    username: data.first_name + " " + data.last_name,
                     image: data.image_url,
                 }
                 await User.findByIdAndUpdate(data.id , userData);
                 break;
             }    
             case "user.deleted":{
-                await User.findByIdAndDelete(data.id , userData);
+                await User.findByIdAndDelete(data.id);
                 break;
             }   
         

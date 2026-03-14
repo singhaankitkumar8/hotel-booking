@@ -27,16 +27,16 @@ export const AppProvider = ({children}) => {
             if(data.success){
                 setRooms(data.rooms)
             }else{
-                toast.error(data.message)
+                toast.error(data.message || "Error in fetch rooms")
             }
         } catch (error) {
-            toast.error(error.message)
+            toast.error(error.message || "Error in fetch rooms")
         }
     }
 
     const fetchUser = async () => {
         try {
-            const {data} =await axios.get('/api/user', {headers: {Authorization:n`Bearer ${await getToken()}`}})
+            const {data} =await axios.get('/api/user', {headers: {Authorization:`Bearer ${await getToken()}`}})
             if(data.success){
                 setIsOwner(data.role === "HotelOwner");
                 setSearchedCities(data.recentSearchedCities)
@@ -47,7 +47,8 @@ export const AppProvider = ({children}) => {
                 } , 5000)
             }
         } catch (error) {
-            toast.error(error.message)
+            toast.error(error.message || "Error in fetch rooms")
+            console.log(error.message)
         }
     }
 

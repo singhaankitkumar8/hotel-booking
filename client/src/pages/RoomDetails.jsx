@@ -34,9 +34,11 @@ const RoomDetails = () => {
         }
       }else{
         toast.error(data.message)
+        console.log(data.message)
       }
     } catch (error) {
       toast.error(error.message)
+      console.log(error.message)
     }
   }
 
@@ -55,10 +57,12 @@ const RoomDetails = () => {
           scrollTo(0,0) //scroll the web page to the top
         }else{
           toast.error(data.message)
+          console.log(data.message)
         }
       }
     } catch (error) {
       toast.error(error.message)
+      console.log(error.message)
     }
   }
 

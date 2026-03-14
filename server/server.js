@@ -24,14 +24,15 @@ app.use(cors())    //Enable cross origin resource sharing
 
 
 //Middlewares
-app.use(express.json())
 app.use(clerkMiddleware())     //clerk middleware
 
 //API to listen to stripe webhook
 app.post('/api/stripe', express.raw({type: "application/json"}),stripeWebhooks)
 
 //API to listen to clerk webhook
-app.use("/api/clerk" , clerkWebhooks)
+app.post("/api/clerk", express.raw({ type: "application/json" }), clerkWebhooks)
+
+app.use(express.json())
 
 app.get('/',(req , res) => res.send("Api is working..."))
 app.use('/api/user' , userRouter)

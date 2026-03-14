@@ -25,10 +25,13 @@ const HotelReg = () => {
                 setIsOwner(true)
                 setShowHotelReg(false);
             }else{
-                toast.error(data.message)
+                toast.error(data?.message || "Problem in hotel register")
+                console.log(data?.message)
+
             }
         } catch (error) {
-            toast.error(error.message)
+            toast.error(error?.message || "Problem in hotel register")
+            console.log(error.message)
         }
     }
 

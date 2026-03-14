@@ -15,9 +15,11 @@ const MyBookings = () => {
                 setBookings(data.bookings)
             }else{
                 toast.error(data.message)
+                console.log(data.message)
             }
         } catch (error) {
             toast.error(error.message)
+            console.log(error.message)
         }
     }
 
@@ -28,9 +30,11 @@ const MyBookings = () => {
                 window.location.href = data.url;
             }else{
                 toast.error(data.message)
+                console.log(data.message)
             }
         } catch (error) {
             toast.error(error.message)
+            console.log(error.message)
         }
     }
 

@@ -3,6 +3,13 @@ import User from "../models/user.model.js"
 
 export const registerHotel = async (req,res) => {
     try {
+        if(!req.user){
+            return res.json({
+                success:false,
+                message:"User not authenticated"
+            })
+        }
+        
         const {name , address , contact , city} = req.body;
         const owner = req.user._id
   

@@ -20,9 +20,11 @@ const Dashboard = () => {
         setDashboardData(data.dashboardData)
       }else{
         toast.error(data.message)
+        console.log(data.message)
       }
     } catch (error) {
       toast.error(error.message)
+      console.log(error.message)
     }
   } 
 
