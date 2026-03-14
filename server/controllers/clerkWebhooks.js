@@ -3,6 +3,7 @@ import { Webhook } from "svix"
 
 const clerkWebhooks = async (req , res) => {
     try {
+        console.log("Webhook request received")
         //Create a Svix instance with clerk webhook secret.
         const whook = new Webhook(process.env.CLERK_WEBHOOK_SECRET)
 
@@ -13,20 +14,26 @@ const clerkWebhooks = async (req , res) => {
             "svix-signature": req.headers["svix-signature"],
         };
 
+
+        console.log("Headers:", req.headers)
         //verifying headers
-        await whook.verify(JSON.stringify(req.body),headers)
+        // await whook.verify(JSON.stringify(req.body),headers)
+        const payload = req.body.toString();
+        const evt = whook.verify(payload, headers);
 
         //Getting Data from request body
-        const {data,type} = req.body
+        // const {data,type} = req.body
+        const { data, type } = evt;
 
         console.log("Webhook triggered:", type)
         
         //Switch cases for different events
         switch (type) {
             case "user.created":{
+                console.log("Webhook data:", data)
                 const userData = {
                     _id: data.id,
-                    email:data.email_addresses[0].email_address,
+                    email:data.email_addresses?.[0]?.email_address,
                     username: data.first_name + " " + data.last_name,
                     image: data.image_url,
                 }
@@ -36,7 +43,7 @@ const clerkWebhooks = async (req , res) => {
             case "user.updated":{
                 const userData = {
                     // _id: data.id,
-                    email:data.email_addresses[0].email_address,
+                    email:data.email_addresses?.[0]?.email_address,
                     username: data.first_name + " " + data.last_name,
                     image: data.image_url,
                 }

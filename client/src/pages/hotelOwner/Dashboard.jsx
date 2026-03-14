@@ -7,24 +7,34 @@ import { useAppContext } from '../../context/AppContext.jsx'
 
 const Dashboard = () => {
 
-  const [dashboardData , setDashboardData] = useState({
+  const [dashBoardData , setDashBoardData] = useState({
     bookings: [],
     totalBookings: 0,
     totalRevenue: 0,
   })
   const { currency , user , getToken , toast , axios} = useAppContext();
+
   const fetchDashboardData = async () => {
     try {
-      const { data } =await axios.get('/api/bookings/hotel' , {Headers: {Authorization: `Bearer ${await getToken()}`}})
+      const { data } =await axios.get('/api/bookings/hotel' , {headers: {Authorization: `Bearer ${await getToken()}`}})
+
+      if (!data) {
+        console?.error("No response data from backend");
+        toast?.error("No data received from server");
+        return;
+      }
+
       if(data.success){
-        setDashboardData(data.dashboardData)
+        setDashBoardData(data.dashBoardData || [])
       }else{
-        toast.error(data.message)
-        console.log(data.message)
+        toast?.error(data?.message || "Error Fetching dashboard")
+        console.log(data?.message)
       }
     } catch (error) {
-      toast.error(error.message)
-      console.log(error.message)
+      const errMsg =
+      error?.response?.data?.message || error?.message || "Something went wrong";
+      toast?.error(errMsg);
+      console.log(errMsg);
     }
   } 
 
@@ -46,7 +56,7 @@ const Dashboard = () => {
           <img src={assets.totalBookingIcon} alt="" className='max-sm:hidden h-10' />
           <div className='flex flex-col sm:ml-4 font-medium'>
             <p className='text-blue-500 text-lg'>Total Bookings</p>
-            <p className='text-neutral-400 text-base'>{dashboardData.totalBookings}</p>
+            <p className='text-neutral-400 text-base'>{dashBoardData.totalBookings}</p>
           </div>
         </div>
 
@@ -56,7 +66,7 @@ const Dashboard = () => {
           <img src={assets.totalRevenueIcon} alt="" className='max-sm:hidden h-10' />
           <div className='flex flex-col sm:ml-4 font-medium'>
             <p className='text-blue-500 text-lg'>Total Revenue</p>
-            <p className='text-neutral-400 text-base'>{currency} {dashboardData.totalRevenue}</p>
+            <p className='text-neutral-400 text-base'>{currency} {dashBoardData.totalRevenue}</p>
           </div>
         </div>
       </div>
@@ -76,7 +86,7 @@ const Dashboard = () => {
           </thead>
           
           <tbody className='text-sm'>
-              {dashboardData.bookings.map((item, index) => (
+              {dashBoardData.bookings.map((item, index) => (
                 <tr key={index}>
                     <td className='py-3 px-4 text-gray-700 border-t border-gray-300'>
                       {item.user.username}
